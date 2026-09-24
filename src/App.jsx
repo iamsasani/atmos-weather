@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Header from "./components/Header";
 import SearchBar from "./components/SearchBar";
@@ -16,6 +16,10 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const [isDark, setIsDark] = useState(() => {
+    return localStorage.getItem("theme") === "dark";
+  });
+
   const [recentCities, setRecentCities] = useState(() => {
     try {
       const savedCities = localStorage.getItem("recentCities");
@@ -25,6 +29,23 @@ function App() {
       return [];
     }
   });
+
+  useEffect(() => {
+    const root = document.documentElement;
+
+    root.classList.toggle("dark", isDark);
+
+    root.style.colorScheme = isDark ? "dark" : "light";
+
+    localStorage.setItem(
+      "theme",
+      isDark ? "dark" : "light"
+    );
+  }, [isDark]);
+
+  const handleToggleTheme = () => {
+    setIsDark((prev) => !prev);
+  };
 
   const handleSearch = async (cityName = city) => {
     const trimmedCity = cityName.trim();
@@ -44,7 +65,8 @@ function App() {
         const updatedCities = [
           trimmedCity,
           ...prevCities.filter(
-            (item) => item.toLowerCase() !== trimmedCity.toLowerCase()
+            (item) =>
+              item.toLowerCase() !== trimmedCity.toLowerCase()
           ),
         ].slice(0, 5);
 
@@ -69,10 +91,24 @@ function App() {
   };
 
   return (
-    <main className="min-h-screen bg-[#f7f7f5] text-[#111111]">
+    <main
+      className="
+        min-h-screen
+        bg-[#f7f7f5]
+        text-[#111111]
+        transition-colors
+        duration-300
+
+        dark:bg-[#111111]
+        dark:text-[#f5f5f5]
+      "
+    >
       <div className="mx-auto max-w-5xl px-6 py-8 md:px-10">
 
-        <Header />
+        <Header
+          isDark={isDark}
+          onToggleTheme={handleToggleTheme}
+        />
 
         <section className="flex min-h-[80vh] flex-col items-center justify-center">
           <div className="w-full max-w-xl">
@@ -95,7 +131,7 @@ function App() {
             {/* Loading */}
             {loading && (
               <div className="py-10 text-center">
-                <p className="text-sm text-black/40">
+                <p className="text-sm text-black/40 dark:text-white/40">
                   Searching...
                 </p>
               </div>
@@ -104,7 +140,7 @@ function App() {
             {/* Error */}
             {!loading && error && (
               <div className="py-10 text-center">
-                <p className="text-sm text-red-500">
+                <p className="text-sm text-red-500 dark:text-red-400">
                   {error}
                 </p>
               </div>
@@ -114,7 +150,6 @@ function App() {
             {!loading && weather && (
               <>
                 <CurrentWeather weather={weather} />
-
                 <WeatherStats weather={weather} />
               </>
             )}
@@ -126,7 +161,7 @@ function App() {
                   ☁️
                 </p>
 
-                <p className="mt-4 text-sm text-black/40">
+                <p className="mt-4 text-sm text-black/40 dark:text-white/40">
                   Search for a city to see the weather
                 </p>
               </div>
@@ -143,4 +178,3 @@ function App() {
 }
 
 export default App;
-

@@ -1,4 +1,3 @@
-
 function RecentCities({ cities, onSelect, onClear }) {
   if (cities.length === 0) {
     return null;
@@ -6,15 +5,16 @@ function RecentCities({ cities, onSelect, onClear }) {
 
   return (
     <section className="mb-12">
+
       <div className="mb-4 flex items-center justify-between">
-        <p className="text-xs font-medium uppercase tracking-[0.2em] text-black/40">
+        <p className="text-xs font-medium uppercase tracking-[0.2em] text-black/40 dark:text-white/40">
           Recent searches
         </p>
 
         <button
           type="button"
           onClick={onClear}
-          className="text-xs text-black/30 transition hover:text-black/60"
+          className="text-xs text-black/30 transition hover:text-black/60 dark:text-white/30 dark:hover:text-white/60"
         >
           Clear
         </button>
@@ -26,15 +26,33 @@ function RecentCities({ cities, onSelect, onClear }) {
             key={city}
             type="button"
             onClick={() => onSelect(city)}
-            className="rounded-full border border-black/10 px-4 py-2 text-sm text-black/60 transition hover:border-black/20 hover:bg-black/[0.03] hover:text-black"
+            className="
+              rounded-full
+              border
+              border-black/10
+              px-4
+              py-2
+              text-sm
+              text-black/60
+              transition
+              hover:border-black/20
+              hover:bg-black/3
+              hover:text-black
+
+              dark:border-white/10
+              dark:text-white/60
+              dark:hover:border-white/20
+              dark:hover:bg-white/5
+              dark:hover:text-white
+            "
           >
             {city}
           </button>
         ))}
       </div>
+
     </section>
   );
 }
 
 export default RecentCities;
-

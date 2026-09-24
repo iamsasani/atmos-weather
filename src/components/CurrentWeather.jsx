@@ -8,7 +8,7 @@ function CurrentWeather({ weather }) {
   return (
     <section className="text-center">
 
-      <p className="text-sm text-black/40">
+      <p className="text-sm text-black/40 dark:text-white/40">
         {weather.name}, {weather.sys.country}
       </p>
 
@@ -30,7 +30,7 @@ function CurrentWeather({ weather }) {
         </span>
       </div>
 
-      <p className="mt-4 text-lg text-black/50 capitalize">
+      <p className="mt-4 text-lg text-black/50 dark:text-white/50">
         {description}
       </p>
 
@@ -39,4 +39,3 @@ function CurrentWeather({ weather }) {
 }
 
 export default CurrentWeather;
-

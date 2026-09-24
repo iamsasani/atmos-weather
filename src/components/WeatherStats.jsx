@@ -2,10 +2,10 @@ function WeatherStats({ weather }) {
   if (!weather) return null;
 
   return (
-    <section className="mt-16 grid grid-cols-3 border-y border-black/10 py-6">
+    <section className="mt-16 grid grid-cols-3 border-y border-black/10 py-6 dark:border-white/10">
 
       <div className="text-center">
-        <p className="text-xs uppercase tracking-wider text-black/40">
+        <p className="text-xs uppercase tracking-wider text-black/40 dark:text-white/40">
           Feels like
         </p>
 
@@ -14,8 +14,8 @@ function WeatherStats({ weather }) {
         </p>
       </div>
 
-      <div className="border-x border-black/10 text-center">
-        <p className="text-xs uppercase tracking-wider text-black/40">
+      <div className="border-x border-black/10 text-center dark:border-white/10">
+        <p className="text-xs uppercase tracking-wider text-black/40 dark:text-white/40">
           Humidity
         </p>
 
@@ -25,7 +25,7 @@ function WeatherStats({ weather }) {
       </div>
 
       <div className="text-center">
-        <p className="text-xs uppercase tracking-wider text-black/40">
+        <p className="text-xs uppercase tracking-wider text-black/40 dark:text-white/40">
           Wind
         </p>
 
@@ -39,4 +39,3 @@ function WeatherStats({ weather }) {
 }
 
 export default WeatherStats;
-
